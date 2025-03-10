@@ -1,8 +1,95 @@
 <!DOCTYPE html>
 <html>
+<head>
+    <style>
+        body {
+            background-color: #000000;
+            color: #1f4b8e;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+        }
+        h1 {
+            border-bottom: 2px solid #1f4b8e;
+            padding-bottom: 10px;
+        }
+        a {
+            color: #1f4b8e;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        .matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
 <body>
-<h1>Hi 👋</h1>
-<p>Welcome to Schroedes' Website.</p>
-<p>You should check out my <a href="https://schroedes.xyz/dino">my new copy of the dino game</a> :D</p>
+    <div class="matrix">
+        <canvas id="matrixCanvas"></canvas>
+    </div>
+    <div class="container">
+        <h1>Hi 👋</h1>
+        <p>Welcome to Schroedes' Website.</p>
+        <p>You should check out <a href="https://schroedes.xyz/dino">my new copy of the dino game</a> :D</p>
+    </div>
+    <script>
+        const canvas = document.getElementById('matrixCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const letters = '01';
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+
+        const drops = Array.from({ length: columns }).fill(1);
+
+        const draw = () => {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#000099';
+            ctx.font = `${fontSize}px Courier New`;
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters[Math.floor(Math.random() * letters.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+
+                drops[i]++;
+            }
+        };
+
+        setInterval(draw, 33);
+    </script>
 </body>
 </html>
