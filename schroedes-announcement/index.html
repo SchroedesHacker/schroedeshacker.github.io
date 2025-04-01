@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,13 +10,26 @@
 				padding: 0;
 			}
 			video {
-				width:100%;
-				height:auto;
+				width: 100%;
+				height: auto;
 			}
-
+			#announcement-text {
+				display: none;
+				margin-top: 20px;
+				font-size: 1.2em;
+			}
 		</style>
-		<video width="100%" controls autoplay>
+        <p>Watch this video to learn more about my announcement:</p>
+		<video id="announcement-video" width="100%" controls autoplay>
 			<source src="https://schroedes.xyz/schroedes-announcement/rickroll.mp4" type="video/mp4">
 		</video>
+		<p id="announcement-text">Don't spoil the surprise for others!</p>
+		<script>
+			document.getElementById('announcement-video').addEventListener('timeupdate', function() {
+				if (this.currentTime >= 5) {
+					document.getElementById('announcement-text').style.display = 'block';
+				}
+			});
+		</script>
 	</body>
 </html>
