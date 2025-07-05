@@ -153,25 +153,21 @@
 <div class="overlay"></div>
 
 <main>
-  <h1><span data-l10n>Error</span> <span class="error_code">{{ code }}</span></h1>
-  <p class="output" data-l10n>{{ description }}.</p>
+  <h1><span data-l10n>Error</span> <span class="error_code">{{ 404 }}</span></h1>
+  <p class="output" data-l10n>{{ It seems you decided to go to a place that doesn't exist }}.</p>
   <p class="output"><span data-l10n>Good luck</span>.</p>
   <!-- {{- if show_details -}} -->
   <div class="details">
     <!-- {{- if host -}} -->
-    <p class="output small"><span data-l10n>Host</span>: <code>{{ host }}</code></p>
+    <p class="output small"><span data-l10n>Host</span>: <code>{{ schroedes.xyz }}</code></p>
     <!-- {{- end }}{{ if original_uri -}} -->
-    <p class="output small"><span data-l10n>Original URI</span>: <code>{{ original_uri }}</code></p>
+    <p class="output small"><span data-l10n>Requested URI</span>: <code>{{ unknown location }}</code></p>
     <!-- {{- end }}{{ if forwarded_for -}} -->
     <p class="output small"><span data-l10n>Forwarded for</span>: <code>{{ forwarded_for }}</code></p>
     <!-- {{- end }}{{ if namespace -}} -->
-    <p class="output small"><span data-l10n>Namespace</span>: <code>{{ namespace }}</code></p>
-    <!-- {{- end }}{{ if ingress_name -}} -->
-    <p class="output small"><span data-l10n>Ingress name</span>: <code>{{ ingress_name }}</code></p>
-    <!-- {{- end }}{{ if service_name -}} -->
-    <p class="output small"><span data-l10n>Service name</span>: <code>{{ service_name }}</code></p>
+    <p class="output small"><span data-l10n>Service name</span>: <code>{{ Schroedes Server }}</code></p>
     <!-- {{- end }}{{ if service_port -}} -->
-    <p class="output small"><span data-l10n>Service port</span>: <code>{{ service_port }}</code></p>
+    <p class="output small"><span data-l10n>Service port</span>: <code>{{ 443 }}</code></p>
     <!-- {{- end }}{{ if request_id -}} -->
     <p class="output small"><span data-l10n>Request ID</span>: <code>{{ request_id }}</code></p>
     <!-- {{- end -}} -->

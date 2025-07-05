@@ -3,19 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="robots" content="nofollow,noarchive,noindex">
-  <title>{{ message }}</title>
+  <title>404 Not Found</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- {{ if or (eq code 408) (eq code 425) (eq code 429) (eq code 500) (eq code 502) (eq code 503) (eq code 504) }} -->
-  <meta http-equiv="refresh" content="30">
-  <!-- {{ end }} -->
-  <meta name="title" content="{{ code }}: {{ message | escape }}">
-  <meta name="description" content="{{ description | escape }}">
-  <meta property="og:title" content="{{ code }}: {{ message | escape }}">
-  <meta property="og:description" content="{{ description | escape }}">
-  <meta property="twitter:title" content="{{ code }}: {{ message | escape }}">
-  <meta property="twitter:description" content="{{ description | escape }}">
+  <meta name="title" content="404: Not Found">
+  <meta name="description" content="The page you were looking for does not exist.">
+  <meta property="og:title" content="404: Not Found">
+  <meta property="og:description" content="The page you were looking for does not exist.">
   <style>
-    /** Idea author: https://codepen.io/robinselmer */
     html, body {
       margin: 0;
       padding: 0;
@@ -128,7 +122,6 @@
       color: white;
     }
 
-    /* {{ if show_details }} */
     .details p {
       margin-top: .5em;
       margin-bottom: .5em;
@@ -145,39 +138,39 @@
     .details code {
       font-size: 0.9em;
     }
-
-    /* {{ end }} */
   </style>
 </head>
 <body>
 <div class="overlay"></div>
 
 <main>
-  <h1><span data-l10n>Error</span> <span class="error_code">{{ 404 }}</span></h1>
-  <p class="output" data-l10n>{{ It seems you decided to go to a place that doesn't exist }}.</p>
-  <p class="output"><span data-l10n>Good luck</span>.</p>
-  <!-- {{- if show_details -}} -->
+  <h1><span>Error</span> <span class="error_code">404</span></h1>
+  <p class="output">It seems you decided to go to a place that doesn't exist.</p>
+  <p class="output"><span>Good luck</span>.</p>
   <div class="details">
-    <!-- {{- if host -}} -->
-    <p class="output small"><span data-l10n>Host</span>: <code>{{ schroedes.xyz }}</code></p>
-    <!-- {{- end }}{{ if original_uri -}} -->
-    <p class="output small"><span data-l10n>Requested URI</span>: <code>{{ unknown location }}</code></p>
-    <!-- {{- end }}{{ if forwarded_for -}} -->
-    <p class="output small"><span data-l10n>Forwarded for</span>: <code>{{ forwarded_for }}</code></p>
-    <!-- {{- end }}{{ if namespace -}} -->
-    <p class="output small"><span data-l10n>Service name</span>: <code>{{ Schroedes Server }}</code></p>
-    <!-- {{- end }}{{ if service_port -}} -->
-    <p class="output small"><span data-l10n>Service port</span>: <code>{{ 443 }}</code></p>
-    <!-- {{- end }}{{ if request_id -}} -->
-    <p class="output small"><span data-l10n>Request ID</span>: <code>{{ request_id }}</code></p>
-    <!-- {{- end -}} -->
-    <p class="output small"><span data-l10n>Timestamp</span>: <code>{{ nowUnix }}</code></p>
+    <p class="output small"><span>Host</span>: <code>schroedes.xyz</code></p>
+    <p class="output small" id="requested-uri"><span>Requested URI</span>: <code id="uri-value"></code></p>
+    <p class="output small"><span>Request ID</span>: <code id="request-id"></code></p>
+    <p class="output small"><span>Timestamp</span>: <code id="timestamp"></code></p>
   </div>
-  <!-- {{- end -}} -->
 </main>
 
-<!-- {{- if l10n_enabled -}} -->
-<script>// {{ l10nScript }}</script>
-<!-- {{- end -}} -->
+<script>
+  // Show attempted URL
+  document.getElementById("uri-value").textContent = window.location.href;
+
+  // Generate a simple Request ID: 8 hex chars + timestamp (UTC ms)
+  function generateRequestId() {
+    const hex = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    return hex() + hex() + "-" + Date.now();
+  }
+  document.getElementById("request-id").textContent = generateRequestId();
+
+  // Set current timestamp in ISO8601 (UTC)
+  function getISOTimestamp() {
+    return new Date().toISOString();
+  }
+  document.getElementById("timestamp").textContent = getISOTimestamp();
+</script>
 </body>
 </html>
